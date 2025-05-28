@@ -8,7 +8,6 @@ import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
 import "./styles/main.css";
 
-// Lazy loading for future page components
 const LazyComponent = ({ title }) => (
   <div className="page-content">
     <h2>{title}</h2>
@@ -17,7 +16,6 @@ const LazyComponent = ({ title }) => (
 );
 
 function App() {
-  // Simple auth simulation (replace with real logic)
   const isAuthenticated = !!localStorage.getItem("authToken");
 
   return (
@@ -26,11 +24,8 @@ function App() {
         {isAuthenticated && <Sidebar />}
         <div className={isAuthenticated ? "app-main" : "app-no-sidebar"}>
           <Routes>
-            {/* Auth pages */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-
-            {/* Business selection and onboarding */}
             <Route
               path="/businesses"
               element={isAuthenticated ? <Businesses /> : <Navigate to="/login" />}
@@ -39,14 +34,10 @@ function App() {
               path="/onboarding"
               element={isAuthenticated ? <Onboarding /> : <Navigate to="/login" />}
             />
-
-            {/* Main dashboard */}
             <Route
               path="/dashboard"
               element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />}
             />
-
-            {/* Example for all sidebar subpages: */}
             <Route
               path="/people/*"
               element={isAuthenticated ? <LazyComponent title="اشخاص" /> : <Navigate to="/login" />}
@@ -87,8 +78,6 @@ function App() {
               path="/settings/*"
               element={isAuthenticated ? <LazyComponent title="تنظیمات" /> : <Navigate to="/login" />}
             />
-
-            {/* Default: redirect to dashboard or login */}
             <Route
               path="/"
               element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} />}

@@ -15,7 +15,6 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Helper to get open keys based on current location
   const getDefaultOpenKeys = () => {
     let keys = [];
     SidebarMenuData.forEach((item) => {
@@ -35,17 +34,15 @@ const Sidebar = () => {
     location.pathname,
   ]);
 
-  const handleMenuClick = ({ key, keyPath }) => {
-    const path = key;
+  const handleMenuClick = ({ key }) => {
     setSelectedKeys([key]);
-    navigate(path);
+    navigate(key);
   };
 
   const handleOpenChange = (keys) => {
     setOpenKeys(keys);
   };
 
-  // Menu rendering
   const renderMenuItems = () =>
     SidebarMenuData.map((item) => {
       if (item.children) {
