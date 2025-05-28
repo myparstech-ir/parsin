@@ -1,116 +1,80 @@
-import React, { useState } from "react";
-import { Menu, Button } from "antd";
+import React from "react";
+import { Layout, Menu } from "antd";
 import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
+  DashboardOutlined,
+  AppstoreOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
-import SidebarMenuData from "./SidebarMenuData";
 import { useNavigate, useLocation } from "react-router-dom";
-import "./Sidebar.css";
 
-const { SubMenu } = Menu;
+const { Sider } = Layout;
 
-const Sidebar = () => {
-  const [collapsed, setCollapsed] = useState(false);
+function Sidebar() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const getDefaultOpenKeys = () => {
-    let keys = [];
-    SidebarMenuData.forEach((item) => {
-      if (item.children) {
-        item.children.forEach((child) => {
-          if (location.pathname.startsWith(child.path)) {
-            keys.push(item.key);
-          }
-        });
-      }
-    });
-    return keys;
-  };
-
-  const [openKeys, setOpenKeys] = useState(getDefaultOpenKeys());
-  const [selectedKeys, setSelectedKeys] = useState([
-    location.pathname,
-  ]);
-
   const handleMenuClick = ({ key }) => {
-    setSelectedKeys([key]);
-    navigate(key);
+    if (key === "logout") {
+      localStorage.clear();
+      sessionStorage.clear();
+      navigate("/login");
+    } else {
+      navigate(key);
+    }
   };
-
-  const handleOpenChange = (keys) => {
-    setOpenKeys(keys);
-  };
-
-  const renderMenuItems = () =>
-    SidebarMenuData.map((item) => {
-      if (item.children) {
-        return (
-          <SubMenu
-            key={item.key}
-            icon={item.icon}
-            title={item.label}
-            className="sidebar-submenu"
-          >
-            {item.children.map((child) => (
-              <Menu.Item
-                key={child.path}
-                icon={child.icon}
-                className="sidebar-subitem"
-              >
-                {child.label}
-              </Menu.Item>
-            ))}
-          </SubMenu>
-        );
-      }
-      return (
-        <Menu.Item key={item.path} icon={item.icon}>
-          {item.label}
-        </Menu.Item>
-      );
-    });
 
   return (
-    <div
-      className={`sidebar-container ${collapsed ? "collapsed" : ""}`}
-      dir="rtl"
+    <Sider
+      breakpoint="lg"
+      collapsedWidth="0"
+      style={{
+        background: "#fff",
+        minHeight: "100vh",
+        boxShadow: "0 0 8px #eee",
+        direction: "rtl",
+      }}
+      width={220}
     >
-      <div className="sidebar-toggle-btn">
-        <Button
-          type="text"
-          icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-          onClick={() => setCollapsed(!collapsed)}
-          style={{
-            fontSize: "20px",
-            margin: "16px 0 0 0",
-            color: "#2e86de",
-            background: "#fff",
-            border: "none",
-          }}
-        />
+      <div
+        style={{
+          height: 60,
+          margin: "16px 0",
+          textAlign: "center",
+          fontWeight: 700,
+          fontSize: 20,
+          color: "#2e86de",
+          fontFamily: "AnjomanMax, Tahoma, Arial",
+          letterSpacing: 0,
+        }}
+      >
+        پارسین
       </div>
       <Menu
         mode="inline"
-        theme="light"
-        inlineCollapsed={collapsed}
-        selectedKeys={selectedKeys}
-        openKeys={collapsed ? [] : openKeys}
-        onOpenChange={handleOpenChange}
+        selectedKeys={[location.pathname]}
+        style={{ border: "none", fontFamily: "AnjomanMax, Tahoma, Arial" }}
         onClick={handleMenuClick}
-        style={{
-          height: "100vh",
-          borderRight: 0,
-          background: "#fff",
-          fontWeight: "bold",
-        }}
-        className="sidebar-menu"
-      >
-        {renderMenuItems()}
-      </Menu>
-    </div>
+        items={[
+          {
+            key: "/dashboard",
+            icon: <DashboardOutlined />,
+            label: "داشبورد",
+          },
+          {
+            key: "/businesses",
+            icon: <AppstoreOutlined />,
+            label: "کسب‌وکارها",
+          },
+          {
+            key: "logout",
+            icon: <LogoutOutlined />,
+            label: "خروج",
+            danger: true,
+          },
+        ]}
+      />
+    </Sider>
   );
-};
+}
 
 export default Sidebar;

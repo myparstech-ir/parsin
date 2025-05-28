@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, List, Typography, Modal, Form, Input, Select, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { getUserBusinesses, addBusiness } from "../db";
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -11,32 +12,37 @@ function Businesses() {
   const [modalVisible, setModalVisible] = useState(false);
   const [form] = Form.useForm();
   const navigate = useNavigate();
+  const userId = localStorage.getItem("authUserId") || sessionStorage.getItem("authUserId");
+
+  // گرفتن لیست کسب‌وکار از دیتابیس
+  const loadBusinesses = () => {
+    if (!userId) return;
+    const list = getUserBusinesses(userId);
+    setBusinesses(list || []);
+  };
 
   useEffect(() => {
-    // شبیه‌سازی دریافت لیست کسب‌وکارها از localStorage
-    const stored = JSON.parse(localStorage.getItem("businesses") || "[]");
-    setBusinesses(stored);
+    loadBusinesses();
+    // eslint-disable-next-line
   }, []);
 
   const handleCreateBusiness = (values) => {
-    const newBusiness = {
-      name: values.name,
-      lang: values.lang,
-      id: Date.now(),
-      infoFilled: false,
-    };
-    const updated = [...businesses, newBusiness];
-    setBusinesses(updated);
-    localStorage.setItem("businesses", JSON.stringify(updated));
-    message.success("کسب‌وکار جدید ایجاد شد. لطفاً اطلاعات تکمیلی را وارد کنید.");
-    setModalVisible(false);
-    // رفتن به مرحله اطلاعات تکمیلی کسب‌وکار
-    navigate("/onboarding", { state: { business: newBusiness } });
+    const result = addBusiness({ userId, name: values.name, lang: values.lang });
+    if (result.success) {
+      message.success("کسب‌وکار جدید ایجاد شد. لطفاً اطلاعات تکمیلی را وارد کنید.");
+      setModalVisible(false);
+      form.resetFields();
+      loadBusinesses();
+      // رفتن به مرحله اطلاعات تکمیلی کسب‌وکار
+      navigate("/onboarding", { state: { businessId: result.businessId } });
+    } else {
+      message.error("خطا در ایجاد کسب‌وکار");
+    }
   };
 
   const handleSelect = (biz) => {
-    if (!biz.infoFilled) {
-      navigate("/onboarding", { state: { business: biz } });
+    if (!biz.info_filled) {
+      navigate("/onboarding", { state: { businessId: biz.id } });
     } else {
       localStorage.setItem("activeBusiness", biz.id);
       message.success(`کسب‌وکار "${biz.name}" انتخاب شد.`);
@@ -57,7 +63,7 @@ function Businesses() {
           <List.Item
             actions={[
               <Button type="link" onClick={() => handleSelect(biz)}>
-                {biz.infoFilled ? "ورود" : "تکمیل اطلاعات"}
+                {biz.info_filled ? "ورود" : "تکمیل اطلاعات"}
               </Button>,
             ]}
           >

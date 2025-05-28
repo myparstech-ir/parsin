@@ -1,4 +1,3 @@
-/* === فونت AnjomanMax-Regular === */
 @font-face {
     font-family: 'AnjomanMax';
     src: url('./fonts/AnjomanMax-Regular.woff2') format('woff2'),
@@ -9,8 +8,6 @@
     font-style: normal;
     font-display: swap;
   }
-  
-  /* === فونت AnjomanMax-Medium === */
   @font-face {
     font-family: 'AnjomanMax';
     src: url('./fonts/AnjomanMax-Medium.woff2') format('woff2'),

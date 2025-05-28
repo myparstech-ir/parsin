@@ -1,7 +1,6 @@
 let db, bcrypt, path, os;
 
 const isElectron = () => {
-  // تست اجرای اپلیکیشن در محیط Electron
   return !!(window && window.process && window.process.type);
 };
 
@@ -14,7 +13,6 @@ if (isElectron()) {
   const dbPath = path.join(os.homedir(), 'Documents', 'parsin-data.db');
   db = new Database(dbPath);
 
-  // جدول کاربران
   db.prepare(`
     CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -25,7 +23,6 @@ if (isElectron()) {
     )
   `).run();
 
-  // جدول کسب‌وکارها
   db.prepare(`
     CREATE TABLE IF NOT EXISTS businesses (
       id INTEGER PRIMARY KEY AUTOINCREMENT,

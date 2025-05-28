@@ -1,0 +1,71 @@
+body {
+    background: #fafafa;
+    margin: 0;
+  }
+  
+  .form-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  
+  .form-card label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  
+  .form-card input,
+  .form-card select {
+    margin-top: 3px;
+    padding: 6px 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-family: inherit;
+    font-size: 15px;
+  }
+  
+  .form-card hr {
+    margin: 16px 0;
+  }
+  
+  .form-card h4 {
+    margin: 12px 0 4px 0;
+    font-size: 15px;
+    color: #1976d2;
+  }
+  
+  .form-hint {
+    color: #888;
+    font-size: 12px;
+    margin-top: 0;
+  }
+  
+  .form-btns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .primary-btn {
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-size: 15px;
+  }
+  
+  .danger-btn {
+    background: #d32f2f;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-size: 15px;
+  }
