@@ -1,0 +1,30 @@
+.sidebar-container {
+    width: 260px;
+    background: #fff;
+    min-height: 100vh;
+    transition: width 0.2s;
+    box-shadow: 2px 0 8px #eee;
+    z-index: 100;
+    position: relative;
+    direction: rtl;
+  }
+  .sidebar-container.collapsed {
+    width: 80px;
+  }
+  .sidebar-toggle-btn {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 8px;
+    background: #fff;
+  }
+  .sidebar-menu {
+    background: #fff !important;
+    font-size: 16px;
+  }
+  .sidebar-submenu .ant-menu-submenu-title {
+    font-weight: bold;
+  }
+  .sidebar-subitem {
+    font-size: 15px;
+  }

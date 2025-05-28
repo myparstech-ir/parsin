@@ -1,0 +1,41 @@
+body, html, #root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: "Vazirmatn", Tahoma, Arial, sans-serif;
+    background: #f9f9fb;
+    color: #232323;
+    direction: rtl;
+  }
+  .app-root {
+    display: flex;
+    min-height: 100vh;
+    background: #f9f9fb;
+  }
+  .app-main {
+    flex: 1;
+    padding: 32px 24px;
+    min-height: 100vh;
+    background: #f9f9fb;
+    overflow-x: hidden;
+  }
+  .app-no-sidebar {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9f9fb;
+  }
+  .page-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #eee;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .ant-input,
+  .ant-btn {
+    font-family: inherit;
+  }
