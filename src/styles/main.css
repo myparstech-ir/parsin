@@ -1,24 +1,53 @@
-body, html, #root {
+/* === فونت AnjomanMax-Regular === */
+@font-face {
+    font-family: 'AnjomanMax';
+    src: url('./fonts/AnjomanMax-Regular.woff2') format('woff2'),
+         url('./fonts/AnjomanMax-Regular.woff') format('woff'),
+         url('./fonts/AnjomanMax-Regular.ttf') format('truetype'),
+         url('./fonts/AnjomanMax-Regular.eot') format('embedded-opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  /* === فونت AnjomanMax-Medium === */
+  @font-face {
+    font-family: 'AnjomanMax';
+    src: url('./fonts/AnjomanMax-Medium.woff2') format('woff2'),
+         url('./fonts/AnjomanMax-Medium.woff') format('woff'),
+         url('./fonts/AnjomanMax-Medium.ttf') format('truetype'),
+         url('./fonts/AnjomanMax-Medium.eot') format('embedded-opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  body, html, #root {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: "Vazirmatn", Tahoma, Arial, sans-serif;
+    font-family: 'AnjomanMax', Tahoma, Arial, sans-serif !important;
     background: #f9f9fb;
     color: #232323;
     direction: rtl;
   }
+  
   .app-root {
     display: flex;
     min-height: 100vh;
     background: #f9f9fb;
+    direction: rtl;
   }
+  
   .app-main {
     flex: 1;
     padding: 32px 24px;
     min-height: 100vh;
     background: #f9f9fb;
     overflow-x: hidden;
+    direction: rtl;
   }
+  
   .app-no-sidebar {
     width: 100vw;
     min-height: 100vh;
@@ -26,7 +55,9 @@ body, html, #root {
     align-items: center;
     justify-content: center;
     background: #f9f9fb;
+    direction: rtl;
   }
+  
   .page-content {
     background: #fff;
     padding: 2rem;
@@ -34,8 +65,18 @@ body, html, #root {
     box-shadow: 0 2px 8px #eee;
     max-width: 600px;
     margin: 0 auto;
+    font-family: 'AnjomanMax', Tahoma, Arial, sans-serif !important;
+    direction: rtl;
   }
+  
   .ant-input,
-  .ant-btn {
-    font-family: inherit;
+  .ant-btn,
+  .ant-typography,
+  .ant-menu,
+  .ant-form,
+  .ant-list,
+  .ant-modal,
+  .ant-select {
+    font-family: 'AnjomanMax', Tahoma, Arial, sans-serif !important;
+    direction: rtl;
   }
